@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>ClassLibrary1</Name>
+    <Assembly>C:\Users\malin\source\repos\Homeworks_2\ClassLibrary1\bin\Debug\ClassLibrary1.dll</Assembly>
+    <ClientId>f1f83211-38fb-4832-a497-103624265922</ClientId>
+    <FullClassName>ClassLibrary1.ApplicationClass</FullClassName>
+	<VendorId>ADSK</VendorId>
+	<VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
