@@ -64,15 +64,16 @@ namespace ClassLibrary4
                 XYZ point1 = GetWallMidpoint(selectedElements[0]);
                 XYZ point2 = GetWallMidpoint(selectedElements[1]);
                 XYZ vector1 = point1 - point2;
+                
                 //Получение проекции вектора, соединяющего центры стен на нормаль стены
                 var result = vector1.DotProduct(direction1);
-                //Визуализация векторов
+                //Получение конца вектора
+                XYZ point3 = point1 - direction1 * result;
+                //Визуализация векторов можно не использовать, для наглядности
                 using (var transaction = new Transaction(doc, "DotProduct vectors"))
                 {
                     transaction.Start();
-                    VisualizeAsVector(doc, vector1);
-                    VisualizeAsVector(doc, direction1) ;
-                  
+                    VisualizeAsVector(doc, point1, point3);                 
                     transaction.Commit();
                 }
                 // Вывод длины вектора в окне
@@ -124,10 +125,9 @@ namespace ClassLibrary4
         }
 
         //Визуализация вектора в модели
-        public void VisualizeAsVector(Document doc, XYZ endPoint, XYZ startPoint = null)
+        public void VisualizeAsVector(Document doc, XYZ endPoint, XYZ startPoint )
         {
-            if (startPoint == null)
-                startPoint = XYZ.Zero;
+            
             var directShape = DirectShape.CreateElement(doc, new ElementId(BuiltInCategory.OST_GenericModel));
             directShape.SetShape(new List<GeometryObject>() { Line.CreateBound(startPoint, endPoint) });
         }
