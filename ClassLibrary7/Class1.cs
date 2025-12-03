@@ -95,16 +95,17 @@ namespace ClassLibrary7
 
                         }
 
-                        volume=UnitUtils.ConvertFromInternalUnits( volume, DisplayUnitType.DUT_CUBIC_METERS);
-                        area = UnitUtils.ConvertFromInternalUnits(area, DisplayUnitType.DUT_SQUARE_METERS);
-                        edgelenght = UnitUtils.ConvertFromInternalUnits(area, DisplayUnitType.DUT_MILLIMETERS)/1000;
+                        
 
                     }
 
 
                 }
+                volume = UnitUtils.ConvertFromInternalUnits(volume, DisplayUnitType.DUT_CUBIC_METERS);
+                area = UnitUtils.ConvertFromInternalUnits(area, DisplayUnitType.DUT_SQUARE_METERS);
+                edgelenght = UnitUtils.ConvertFromInternalUnits(area, DisplayUnitType.DUT_MILLIMETERS) / 1000;
 
-             
+
                 TaskDialog.Show("Инфо", $"Всего выбрано объектов - {HostObjects.Count} шт\n"
                    +$"Общий объем солидов {volume} м3\n"
                    + $"Общая площадь всех поверхностей солидов {area} м2\n"
