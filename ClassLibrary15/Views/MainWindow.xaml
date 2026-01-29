@@ -1,0 +1,88 @@
+﻿<Window
+    x:Class="ClassLibrary15.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ClassLibrary15.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:ClassLibrary15.ViewModels"
+    Title="Размещение мебели"
+    Width="400"
+    Height="300"
+    MinWidth="350"
+    MinHeight="250"
+    d:DataContext="{d:DesignData viewModels:MainWindowViewModel}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Тип мебели  -->
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                VerticalAlignment="Center"
+                Content="Тип мебели:" />
+            <ComboBox
+                Grid.Column="1"
+                ItemsSource="{Binding FurnitureTypes}"
+                SelectedItem="{Binding SelectedFurnitureType}">
+                <ComboBox.Resources>
+                    <viewModels:FurnitureTypeConverter x:Key="FurnitureTypeConverter" />
+                </ComboBox.Resources>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource FurnitureTypeConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <!--  Количество  -->
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                VerticalAlignment="Center"
+                Content="Количество:" />
+            <TextBox
+                Grid.Column="1"
+                Padding="5,2"
+                VerticalContentAlignment="Center"
+                Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+
+        <!--  Статус  -->
+        <TextBlock
+            Grid.Row="2"
+            Margin="0,0,0,15"
+            FontStyle="Italic"
+            Foreground="Gray"
+            Text="{Binding StatusMessage}"
+            TextWrapping="Wrap" />
+
+        <!--  Кнопка размещения  -->
+        <Button
+            Grid.Row="4"
+            Padding="20,8"
+            Command="{Binding PlaceCommand}"
+            Content="Разместить"
+            FontSize="14"
+            FontWeight="Bold" />
+    </Grid>
+</Window>
